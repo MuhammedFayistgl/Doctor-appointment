@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import Doctor from "../components/Doctor";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/alertsSlice";
 import { AxiosConnection } from "../utils/AxiosINSTENCE";
@@ -9,7 +8,6 @@ import CardLayout from "../components/Card/Dr_Card/CardLayout";
 
 function Home() {
 	const [doctors, setDoctors] = useState([]);
-	console.log("doctors", doctors);
 	const [page, setpage] = useState(1);
 	const [perpage] = useState(4);
 	/**  */
@@ -41,7 +39,6 @@ function Home() {
 					flexDirection: "column",
 					justifyContent: "space-between",
 					flexWrap: "nowrap",
-					gap: "2%",
 					height: "-webkit-fill-available",
 				}}
 			>

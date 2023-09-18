@@ -5,13 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Badge } from "antd";
 import { useWindowSize } from "@uidotdev/usehooks";
-import { FaBarsStaggered } from "react-icons/fa6";
+// import { FaBarsStaggered } from "react-icons/fa6";
 import Sidebar from "./SID_BAR/Sidebar";
 
 function Layout({ children }) {
 	const { width } = useWindowSize();
 	const [collapsed, setCollapsed] = useState(true);
-	const [widthTogle,setwidthTogle] = useState(`toggled`);
+	const [widthTogle, setwidthTogle] = useState(`toggled`);
 	const { user } = useSelector((state) => state.user);
 
 	const navigate = useNavigate();
@@ -46,18 +46,21 @@ function Layout({ children }) {
 						</div>
 					</div> */}
 			<div className={`page-wrapper chiller-theme ${collapsed || width > 640 ? widthTogle : ""}`}>
-				<a id="show-sidebar" className="btn btn-sm btn-dark" href="#">
+				{/* <a id="show-sidebar" className="btn btn-sm btn-dark" href="#">
 					<FaBarsStaggered style={{ color: "#ffff", fontSize: 25 }} onClick={() =>{ setCollapsed(true),setwidthTogle('toggled')}} />
-				</a>
-				<Sidebar collapsed={collapsed} setCollapsed={setCollapsed} setwidthTogle={setwidthTogle}  />
+				</a> */}
+				<Sidebar collapsed={collapsed} setCollapsed={setCollapsed} setwidthTogle={setwidthTogle} />
 
 				<div className="content">
 					<main className="page-content">
 						<div className="header">
-							{collapsed ? (
-								<i className="ri-menu-2-fill header-action-icon" onClick={() => {setCollapsed(!collapsed),setwidthTogle('')}}></i>
-							) : (
-								<i className="ri-close-fill header-action-icon" onClick={() =>{ setCollapsed(!collapsed),setwidthTogle('toggled')}}></i>
+							{!collapsed && (
+								<i
+									className="ri-close-fill header-action-icon"
+									onClick={() => {
+										setCollapsed(!collapsed), setwidthTogle("toggled");
+									}}
+								></i>
 							)}
 
 							<div className="d-flex align-items-center px-4">
