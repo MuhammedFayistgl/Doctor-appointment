@@ -5,15 +5,16 @@ import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/alertsSlice";
 import { AxiosConnection } from "../utils/AxiosINSTENCE";
 import Pagnation from "../components/Pagnation";
+import CardLayout from "../components/Card/Dr_Card/CardLayout";
 
 function Home() {
 	const [doctors, setDoctors] = useState([]);
+	console.log("doctors", doctors);
 	const [page, setpage] = useState(1);
 	const [perpage] = useState(4);
-/**  */
-	const  end = page * perpage;
-	const  start = end - perpage
-
+	/**  */
+	const end = page * perpage;
+	const start = end - perpage;
 
 	const dispatch = useDispatch();
 	const getData = async () => {
@@ -44,14 +45,23 @@ function Home() {
 					height: "-webkit-fill-available",
 				}}
 			>
-				<div style={{ overflow: "scroll", display: "flex", flexDirection: "row", flexWrap: "wrap", }}>
-					{doctors.slice(start,end).map((doctor, i) => (
-						<Doctor key={i} doctor={doctor} />
+				<div
+					style={{
+						overflow: "scroll",
+						display: "flex",
+						flexDirection: "row",
+						flexWrap: "wrap",
+						gap: 9,
+						justifyContent: "space-evenly",
+					}}
+				>
+					{doctors.slice(start, end).map((doctor, i) => (
+						<CardLayout key={i} doctor={doctor} />
 					))}
 				</div>
-
+				,
 				<div style={{ display: "flex", placeContent: "center" }}>
-					<Pagnation setpage={setpage} length={Math.ceil(doctors?.length/4) } />
+					<Pagnation setpage={setpage} length={Math.ceil(doctors?.length / 4)} />
 				</div>
 			</div>
 		</Layout>

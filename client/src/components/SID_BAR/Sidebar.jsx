@@ -10,7 +10,7 @@ import SidbarItem from "./ItemSidbar";
 import HeaderSidbar from "./HeaderSidbar";
 
 // eslint-disable-next-line react/prop-types
-const Sidebar = ({collapsed,setCollapsed}) => {
+const Sidebar = ({collapsed,setCollapsed,setwidthTogle}) => {
 	return (
 		<>
 			{/* <!-- Button  --> */}
@@ -20,7 +20,7 @@ const Sidebar = ({collapsed,setCollapsed}) => {
 					<div className="sidebar-brand">
 						<a>SH Hospitel</a>
 						<div id="close-sidebar">
-							<FaBarsStaggered  onClick={() => setCollapsed(false)}/>
+							<FaBarsStaggered  onClick={() => {setCollapsed(false),setwidthTogle('')}}/>
 						</div>
 					</div>
 					{/* sidebar-brand */}

@@ -9,12 +9,15 @@ import store from "./redux/store";
 import "rsuite/dist/rsuite.min.css";
 import "./index.css";
 import { Suspense } from "react";
+import { ToastProvider } from "react-toast-notifications";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<Provider store={store}>
 		<Suspense fallback={<div className="custom-loader"></div>}>
-			<App />
+			<ToastProvider>
+				<App />
+			</ToastProvider>
 		</Suspense>
 	</Provider>
 );
