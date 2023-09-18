@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 // import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/userSlice";
 import { showLoading, hideLoading } from "../redux/alertsSlice";
@@ -14,18 +14,17 @@ function ProtectedRoute(props) {
 	const { user } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const getUser = async () => {
+	const getUser = useCallback(async () => {
 		try {
 			dispatch(showLoading());
 			const response = await AxiosConnection.post(
-				"/api/user/get-user-info-by-id",
+				"/api/user/get-user-info-by-id"
 				// { token: cookies?.token }
 				// {
 				//   headers: {
 				//     Authorization: `Bearer ${localStorage.getItem("token")}`,
 				//   },
 				// }
-			
 			);
 			dispatch(hideLoading());
 			if (response.data.success) {
@@ -35,18 +34,16 @@ function ProtectedRoute(props) {
 				navigate("/login");
 			}
 		} catch (error) {
-			
 			dispatch(hideLoading());
 			// removeCookie("token");
 			navigate("/login");
 		}
-	};
-
+	});
 	useEffect(() => {
 		if (!user) {
 			getUser();
 		}
-	}, [user]);
+	}, [user, getUser]);
 
 	if (cookies?.token) {
 		return props?.children;

@@ -27,7 +27,6 @@ function Login() {
 		setVisible(!visible);
 	};
 	const onFinish = async (values) => {
-		console.log(values);
 		try {
 			dispatch(showLoading());
 			const response = await AxiosConnection.post("api/user/login", values);

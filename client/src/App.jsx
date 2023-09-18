@@ -3,11 +3,10 @@ import { useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import { lazy } from "react";
 import axios from "axios";
-
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 //
 const Home = lazy(() => import("./pages/Home"));
-const Login = lazy(() => import("./pages/Login"));
-const Register = lazy(() => import("./pages/Register"));
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
 const PublicRoute = lazy(() => import("./components/PublicRoute"));
 const ApplyDoctor = lazy(() => import("./pages/ApplyDoctor"));
