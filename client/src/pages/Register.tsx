@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { hideLoading, showLoading } from "../redux/alertsSlice";
 import { AxiosConnection } from "../utils/AxiosINSTENCE";
-import { useCookies } from "react-cookie";
+
 import { FaUserDoctor } from "react-icons/fa6";
 import { Form, Button } from "rsuite";
 import { InputGroup } from "rsuite";
@@ -18,7 +18,7 @@ import EyeIcon from "@rsuite/icons/legacy/Eye";
 import EyeSlashIcon from "@rsuite/icons/legacy/EyeSlash";
 
 import "./style.css";
-import { geturlendpoint } from "../utils/getUrl";
+
 function Register() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();

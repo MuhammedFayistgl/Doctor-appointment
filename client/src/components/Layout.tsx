@@ -8,6 +8,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 // import { FaBarsStaggered } from "react-icons/fa6";
 import Sidebar from "./SID_BAR/Sidebar";
 
+import UserProfileButton from "../pages/User/UserProfileButton";
 function Layout({ children }) {
 	const { width } = useWindowSize();
 	const [collapsed, setCollapsed] = useState(true);
@@ -69,7 +70,9 @@ function Layout({ children }) {
 								</Badge>
 
 								<Link className="anchor mx-2" to="/profile">
-									{user?.name}
+									<UserProfileButton user={user} />
+								
+								
 								</Link>
 							</div>
 						</div>

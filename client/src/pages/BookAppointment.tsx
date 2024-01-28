@@ -88,70 +88,74 @@ function BookAppointment() {
 	}, []);
 	return (
 		<Layout>
-			
-				{doctor && (
-					<div>
-						<h1 className="page-title">
-							{doctor.firstName} {doctor.lastName}
-						</h1>
-						<hr />
-						<Row gutter={20} className="mt-5" align="middle">
-							<Col span={8} sm={24} xs={24} lg={8}>
-								<img src={"../../public/photo_6073515195055060811_y-removebg-preview.png"} alt="" width="100%" height="400" />
-							</Col>
-							<Col span={8} sm={24} xs={24} lg={8}>
-								<h1 className="normal-text">
-									<b>Timings :</b> {doctor.timings[0]} - {doctor.timings[1]}
-								</h1>
-								<p>
-									<b>Phone Number : </b>
-									{doctor.phoneNumber}
-								</p>
-								<p>
-									<b>Address : </b>
-									{doctor.address}
-								</p>
-								<p>
-									<b>Fee per Visit : </b>
-									{doctor.feePerCunsultation}
-								</p>
-								<p>
-									<b>Website : </b>
-									{doctor.website}
-								</p>
-								<div className="d-flex flex-column pt-2 mt-2">
-									<DatePicker
-										format="DD-MM-YYYY"
-										onChange={(value) => {
-											setDate(moment(value).format("DD-MM-YYYY"));
-											setIsAvailable(false);
-										}}
-									/>
-									<TimePicker
-										format="HH:mm"
-										className="mt-3"
-										onChange={(value) => {
-											setIsAvailable(false);
-											setTime(moment(value).format("HH:mm"));
-										}}
-									/>
-									{!isAvailable && (
-										<Button className="primary-button mt-3 full-width-button" onClick={checkAvailability}>
-											Check Availability
-										</Button>
-									)}
+			{doctor && (
+				<div>
+					<h1 className="page-title">
+						{doctor.firstName} {doctor.lastName}
+					</h1>
+					<hr />
+					<Row gutter={20} className="mt-5" align="middle">
+						<Col span={8} sm={24} xs={24} lg={8}>
+							<img
+								src={"../../public/photo_6073515195055060811_y-removebg-preview.png"}
+								alt=""
+								width="100%"
+								height="400"
+								style={{ minWidth: "fit-content", minHeight: "fit-content" }}
+							/>
+						</Col>
+						<Col span={8} sm={24} xs={24} lg={8}>
+							<h1 className="normal-text">
+								<b>Timings :</b> {doctor.timings[0]} - {doctor.timings[1]}
+							</h1>
+							<p>
+								<b>Phone Number : </b>
+								{doctor.phoneNumber}
+							</p>
+							<p>
+								<b>Address : </b>
+								{doctor.address}
+							</p>
+							<p>
+								<b>Fee per Visit : </b>
+								{doctor.feePerCunsultation}
+							</p>
+							<p>
+								<b>Website : </b>
+								{doctor.website}
+							</p>
+							<div className="d-flex flex-column pt-2 mt-2">
+								<DatePicker
+									format="DD-MM-YYYY"
+									onChange={(value) => {
+										setDate(moment(value).format("DD-MM-YYYY"));
+										setIsAvailable(false);
+									}}
+								/>
+								<TimePicker
+									format="HH:mm"
+									className="mt-3"
+									onChange={(value) => {
+										setIsAvailable(false);
+										setTime(moment(value).format("HH:mm"));
+									}}
+								/>
+								{!isAvailable && (
+									<Button className="primary-button mt-3 full-width-button" onClick={checkAvailability}>
+										Check Availability
+									</Button>
+								)}
 
-									{isAvailable && (
-										<Button className="primary-button mt-3 full-width-button" onClick={bookNow}>
-											Book Now
-										</Button>
-									)}
-								</div>
-							</Col>
-						</Row>
-					</div>
-				)}
-			
+								{isAvailable && (
+									<Button className="primary-button mt-3 full-width-button" onClick={bookNow}>
+										Book Now
+									</Button>
+								)}
+							</div>
+						</Col>
+					</Row>
+				</div>
+			)}
 		</Layout>
 	);
 }

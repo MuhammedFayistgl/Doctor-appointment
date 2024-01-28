@@ -12,8 +12,7 @@ import "./index.css";
 import { Suspense } from "react";
 import { ToastProvider } from "react-toast-notifications";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
 	<Provider store={store}>
 		<Suspense fallback={<div className="custom-loader"></div>}>
 			<ToastProvider>

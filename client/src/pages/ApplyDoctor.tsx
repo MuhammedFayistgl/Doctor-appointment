@@ -9,9 +9,10 @@ import DoctorForm from "../components/DoctorForm";
 import moment from "moment";
 import { AxiosConnection } from "../utils/AxiosINSTENCE";
 import {GiStethoscope} from 'react-icons/gi'
+import { RootState } from "../types/redux";
 function ApplyDoctor() {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state:RootState) => state.user);
   const navigate = useNavigate();
   const onFinish = async (values) => {
     try {

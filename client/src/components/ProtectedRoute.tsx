@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 // import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate,
+	//  useNavigate 
+	} from "react-router-dom";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/userSlice";
@@ -13,7 +15,7 @@ function ProtectedRoute(props) {
 
 	const { user } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const getUser = useCallback(async () => {
 		try {
 			dispatch(showLoading());
@@ -31,14 +33,14 @@ function ProtectedRoute(props) {
 				dispatch(setUser(response.data.data));
 			} else {
 				// removeCookie("token");
-				navigate("/login");
+				// navigate("/login");
 			}
 		} catch (error) {
 			dispatch(hideLoading());
 			// removeCookie("token");
-			navigate("/login");
+			// navigate("/login");
 		}
-	});
+	},[dispatch]);
 	useEffect(() => {
 		if (!user) {
 			getUser();
