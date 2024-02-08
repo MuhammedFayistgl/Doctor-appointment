@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://muhammedfayistgl.github.io/DoctorAppointment/",
   "scripts": {
     "dev": "vite",
     "predeploy": "vite build",

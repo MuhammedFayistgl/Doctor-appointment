@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const AxiosConnection = axios.create({
   baseURL: 'https://doctor-dcql.onrender.com',
-  // baseURL: 'https://cute-plum-angler-cuff.cyclic.app',
+
   // Producton url 
   // baseURL: 'http://localhost:5000/',
   // mode: "cors",

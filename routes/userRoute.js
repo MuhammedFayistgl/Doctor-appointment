@@ -79,7 +79,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/get-user-info-by-id", authMiddleware, async (req, res) => {
-//   console.log('req.body.userId',req.body.userId);
+	//   console.log('req.body.userId',req.body.userId);
 	try {
 		const user = await User.findOne({ _id: req.body.userId });
 		// console.log("user", user);
@@ -191,7 +191,7 @@ router.get("/get-all-approved-doctors", authMiddleware, async (req, res) => {
 		res.status(200).send({
 			message: "Doctors fetched successfully",
 			success: true,
-			data: doctors,
+			doctors,
 		});
 	} catch (error) {
 		console.log(error);

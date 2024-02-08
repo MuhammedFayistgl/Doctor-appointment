@@ -5,11 +5,12 @@ import { showLoading, hideLoading } from "../redux/alertsSlice";
 import { AxiosConnection } from "../utils/AxiosINSTENCE";
 import Pagnation from "../components/Pagnation";
 import CardLayout from "../components/Card/Dr_Card/CardLayout";
-import { QueryClient, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { DoctorsType } from "../types/DoctorsType";
 import { setDoctors } from "../redux/DoctorSlice";
 import { RootState } from "../types/redux";
 import CardPlaceHolder from "../components/PliceHolder/CardPlaceHolder";
+import toast from "react-hot-toast";
 function Home() {
     const [page, setpage] = useState(1);
     const [perpage] = useState(4);
@@ -17,29 +18,24 @@ function Home() {
     const end = page * perpage;
     const start = end - perpage;
     const { doctors } = useSelector((state: RootState) => state.Doctors);
-
     const dispatch = useDispatch();
-    const queryClient = new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: Infinity,
-          },
-        },
-      })
-    useQuery({
+
+    const queryClient = useQueryClient();
+
+    const { data, isLoading, error } = useQuery({
         queryKey: ["api-user-get-all-approved-doctors"],
-        queryFn: async () => {
-            dispatch(showLoading());
-            AxiosConnection.get("api/user/get-all-approved-doctors")
-                .then((response) => {
-                    if (response?.data?.success) {
-                        dispatch(hideLoading());
-                        dispatch(setDoctors(response.data.data));
-                    }
-                })
-                .catch((error) => dispatch(hideLoading()));
-        },
+        queryFn: () => AxiosConnection.get("api/user/get-all-approved-doctors"),
+        staleTime: 60 * 1000,
     });
+
+    if (isLoading) dispatch(showLoading());
+    if (data?.data?.success) {
+        dispatch(setDoctors(data?.data?.data));
+        dispatch(hideLoading());
+    }
+    if (error) {
+        toast.error(error.message);
+    }
 
     return (
         <Layout>

@@ -66,7 +66,7 @@ const navigate = useNavigate();
                     {/* Login Form  */}
                     <Form layout="inline" onChange={setFormValue} formValue={formValue}>
                         <Form.Group controlId="username-8">
-                            <Form.Control placeholder="Username" name="email" />
+                            <Form.Control placeholder="Username" name="email"  />
                         </Form.Group>
 
                         <Form.Group controlId="password-8">
