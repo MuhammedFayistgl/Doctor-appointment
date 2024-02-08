@@ -26,13 +26,13 @@ const navigate = useNavigate();
     const handleChange = () => {
         setVisible(!visible);
     };
-    const onFinish = async (values) => {
+    const onFinish = async () => {
         try {
             dispatch(showLoading());
-            const response = await AxiosConnection.post("api/user/login", values);
+            const response = await AxiosConnection.post("api/user/login", formValue);
             dispatch(hideLoading());
             if (response.data.success) {
-				
+
                 setCookie("token", response.data.data);
                 navigate('/')
                 toast.success(response.data.message);
@@ -76,11 +76,11 @@ const navigate = useNavigate();
                             </InputGroup>
                         </Form.Group>
                         <Button
-                            onClick={() => onFinish(formValue)}
+                            onClick={() => onFinish()}
                             color="cyan"
                             appearance="ghost"
                             style={{ marginBottom: 20, width: 223 }}
-                            Type="submit">
+                            >
                             Login
                         </Button>
                     </Form>

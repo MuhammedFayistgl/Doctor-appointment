@@ -27,14 +27,14 @@ function Register() {
     const navigate = useNavigate();
     const location = useLocation();
     const [visible, setVisible] = React.useState(false);
-    const [formValue, setFormValue] = React.useState<FormDataType|null>(null);
+    const [formValue, setFormValue] = React.useState({});
     const handleChange = () => {
         setVisible(!visible);
     };
-    const onFinish = async (values:FormDataType) => {
+    const onFinish = async () => {
         try {
             dispatch(showLoading());
-            const response = await AxiosConnection.post("/api/user/register", values);
+            const response = await AxiosConnection.post("/api/user/register", formValue);
             dispatch(hideLoading());
             if (response.data.success) {
                 toast.success(response.data.message);
@@ -81,11 +81,11 @@ function Register() {
                             </InputGroup>
                         </Form.Group>
                         <Button
-                            onClick={() => onFinish(formValue)}
+                            onClick={() => onFinish()}
                             color="cyan"
                             appearance="ghost"
                             style={{ marginBottom: 20, width: 223 }}
-                            Type="submit">
+                            >
                             Register
                         </Button>
                     </Form>
