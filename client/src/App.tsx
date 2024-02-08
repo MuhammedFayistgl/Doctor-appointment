@@ -5,6 +5,7 @@ import { lazy } from "react";
 import axios from "axios";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { RootState } from "./types/redux";
 //
 const Home = lazy(() => import("./pages/Home"));
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
@@ -20,7 +21,7 @@ const DoctorAppointments = lazy(() => import("./pages/Doctor/DoctorAppointments"
 const Userprofile = lazy(() => import("./pages/User/Userprofile"));
 
 function App() {
-	const { loading } = useSelector((state) => state.alerts);
+	const { loading } = useSelector((state:RootState) => state.alerts);
 	axios.defaults.withCredentials = true;
 	// eslint-disable-next-line no-unused-vars
 
@@ -36,9 +37,9 @@ function App() {
 				<Route
 					path="/login"
 					element={
-						<PublicRoute>
+						// <PublicRoute>
 							<Login />
-						</PublicRoute>
+						// </PublicRoute>
 					}
 				/>
 				<Route

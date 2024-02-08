@@ -185,6 +185,7 @@ router.post("/delete-all-notifications", authMiddleware, async (req, res) => {
 });
 
 router.get("/get-all-approved-doctors", authMiddleware, async (req, res) => {
+	console.log("/get-all-approved-doctors");
 	try {
 		const doctors = await Doctor.find({ status: "approved" });
 		res.status(200).send({

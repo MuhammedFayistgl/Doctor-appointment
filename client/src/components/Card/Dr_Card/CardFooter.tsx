@@ -2,9 +2,12 @@
 import { Box, Button } from "@mui/material";
 
 import { Rate } from "rsuite";
+import { DoctorsType } from "../../../types/DoctorsType";
 
-// eslint-disable-next-line no-unused-vars
-const CardFooter = ({doctor}) => {
+type CardFooter ={
+	doctor : DoctorsType
+}
+const CardFooter = ({doctor}:CardFooter) => {
 	return (
 		<>
 			<Box sx={{display:'flex',flexDirection:'column',gap:1}}>

@@ -18,83 +18,88 @@ import EyeIcon from "@rsuite/icons/legacy/Eye";
 import EyeSlashIcon from "@rsuite/icons/legacy/EyeSlash";
 
 import "./style.css";
-
+type FormDataType = {
+    name: string;
+    email: string;
+};
 function Register() {
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const location = useLocation()
-	const [visible, setVisible] = React.useState(false);
-	const [formValue, setFormValue] = React.useState({});
-	const handleChange = () => {
-		setVisible(!visible);
-	};
-	const onFinish = async (values) => {
-		try {
-			dispatch(showLoading());
-			const response = await AxiosConnection.post("/api/user/register", values);
-			dispatch(hideLoading());
-			if (response.data.success) {
-				toast.success(response.data.message);
-				navigate("/login");
-			} else {
-				toast.error(response.data.message);
-			}
-		} catch (error) {
-			dispatch(hideLoading());
-			toast.error("Something went wrong");
-		}
-	};
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [visible, setVisible] = React.useState(false);
+    const [formValue, setFormValue] = React.useState<FormDataType|null>(null);
+    const handleChange = () => {
+        setVisible(!visible);
+    };
+    const onFinish = async (values:FormDataType) => {
+        try {
+            dispatch(showLoading());
+            const response = await AxiosConnection.post("/api/user/register", values);
+            dispatch(hideLoading());
+            if (response.data.success) {
+                toast.success(response.data.message);
+                navigate("/login");
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            dispatch(hideLoading());
+            toast.error("Something went wrong");
+        }
+    };
 
-	return (
-		<>
-			<div className="wrapper fadeInDown">
-				<div id="formContent">
-					{/* Tabs Titles */}
-					<Link to={"/login"} className={ location.pathname === `/login` ?   `active h2` :`inactive h2 underlineHover` }> Sign In </Link>
-					<Link to={"/register"} className={location.pathname === `/register` ? `active h2`  :`inactive h2 underlineHover` }>
-						Register
-					</Link>
+    return (
+        <>
+            <div className="wrapper fadeInDown">
+                <div id="formContent">
+                    {/* Tabs Titles */}
+                    <Link to={"/login"} className={location.pathname === `/login` ? `active h2` : `inactive h2 underlineHover`}>
+                        {" "}
+                        Sign In{" "}
+                    </Link>
+                    <Link to={"/register"} className={location.pathname === `/register` ? `active h2` : `inactive h2 underlineHover`}>
+                        Register
+                    </Link>
 
-					{/* Icon  */}
-					<div className="fadeIn first" style={{ marginBottom: 18 }}>
-						<FaUserDoctor className="DoctorSvg" fontSize={100} />
-					</div>
+                    {/* Icon  */}
+                    <div className="fadeIn first" style={{ marginBottom: 18 }}>
+                        <FaUserDoctor className="DoctorSvg" fontSize={100} />
+                    </div>
 
-					{/* Login Form  */}
-					<Form layout="inline" onChange={setFormValue} formValue={formValue}>
-						<Form.Group controlId="username-8">
-							<Form.Control placeholder="Username" name="name" />
-						</Form.Group>
-						<Form.Group controlId="username-8">
-							<Form.Control placeholder="Email" name="email" />
-						</Form.Group>
-						<Form.Group controlId="password-8">
-							<InputGroup inside>
-								<Form.Control placeholder="Password" name="password" type={visible ? "text" : "password"} />
-								<InputGroup.Button onClick={handleChange}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
-							</InputGroup>
-						</Form.Group>
-						<Button
-							onClick={() => onFinish(formValue)}
-							color="cyan"
-							appearance="ghost"
-							style={{ marginBottom: 20, width: 223 }}
-							Type="submit"
-						>
-							Register
-						</Button>
-					</Form>
+                    {/* Login Form  */}
+                    <Form layout="inline" onChange={setFormValue} formValue={formValue}>
+                        <Form.Group controlId="username-8">
+                            <Form.Control placeholder="Username" name="name" />
+                        </Form.Group>
+                        <Form.Group controlId="username-8">
+                            <Form.Control placeholder="Email" name="email" />
+                        </Form.Group>
+                        <Form.Group controlId="password-8">
+                            <InputGroup inside>
+                                <Form.Control placeholder="Password" name="password" type={visible ? "text" : "password"} />
+                                <InputGroup.Button onClick={handleChange}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
+                            </InputGroup>
+                        </Form.Group>
+                        <Button
+                            onClick={() => onFinish(formValue)}
+                            color="cyan"
+                            appearance="ghost"
+                            style={{ marginBottom: 20, width: 223 }}
+                            Type="submit">
+                            Register
+                        </Button>
+                    </Form>
 
-					{/* Remind Passowrd */}
-					<div id="formFooter">
-						<a className="underlineHover a" href="#">
-							Forgot Password?
-						</a>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+                    {/* Remind Passowrd */}
+                    <div id="formFooter">
+                        <a className="underlineHover a" href="#">
+                            Forgot Password?
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 }
 
 export default Register;

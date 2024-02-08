@@ -1,9 +1,10 @@
 
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../../types/redux";
 
 const SidbarItem = () => {
-	const { user } = useSelector((state) => state.user);
+	const { user } = useSelector((state:RootState) => state.userSlice);
 	const userMenu = [
 		{
 			name: "Home",

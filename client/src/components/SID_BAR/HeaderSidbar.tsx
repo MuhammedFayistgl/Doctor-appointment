@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 import { Avatar } from "rsuite";
 import { Detector } from "react-detect-offline";
 import { Link, useNavigate } from "react-router-dom";
+import { RootState } from "../../types/redux";
 const HeaderSidbar = () => {
-	const { user } = useSelector((state) => state.user);
+	const { user } = useSelector((state:RootState) => state.userSlice);
 	const navigate = useNavigate();
 
 	const role = user?.isAdmin ? "Admin" : user?.isDoctor ? "Doctor" : "User";

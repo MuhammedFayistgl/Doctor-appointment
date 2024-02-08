@@ -5,10 +5,11 @@ import { Badge } from "rsuite";
 import Alertdialogs from "../Alertdialogs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "../../types/redux";
 
 
 const Sidebarfooter = () => {
-    const { user } = useSelector((state) => state.user);
+    const { user } = useSelector((state:RootState) => state.userSlice);
     const navigate = useNavigate();
 	return (
 		<>

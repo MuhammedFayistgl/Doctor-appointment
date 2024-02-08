@@ -1,5 +1,11 @@
 /* eslint-disable react/prop-types */
-const CardBody = ({ doctor }) => {
+
+import { DoctorsType } from "../../../types/DoctorsType";
+
+type CardBody = {
+	doctor:DoctorsType
+}
+const CardBody = ({ doctor }:CardBody) => {
 	return (
 		<>
 			<strong color="black">{doctor?.firstName}</strong>

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import "../layout.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -9,11 +9,15 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import Sidebar from "./SID_BAR/Sidebar";
 
 import UserProfileButton from "../pages/User/UserProfileButton";
-function Layout({ children }) {
+import { RootState } from "../types/redux";
+type LayoutType = {
+	children:ReactNode
+}
+function Layout({ children }:LayoutType) {
 	const { width } = useWindowSize();
 	const [collapsed, setCollapsed] = useState(true);
 	const [widthTogle, setwidthTogle] = useState(`toggled`);
-	const { user } = useSelector((state) => state.user);
+	const { user } = useSelector((state:RootState) => state.userSlice);
 
 	const navigate = useNavigate();
 

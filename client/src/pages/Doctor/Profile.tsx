@@ -8,9 +8,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import DoctorForm from "../../components/DoctorForm";
 import moment from "moment";
 import { AxiosConnection } from "../../utils/AxiosINSTENCE";
+import { RootState } from "../../types/redux";
 
 function Profile() {
-	const { user } = useSelector((state) => state.user);
+	const { user } = useSelector((state:RootState) => state.user);
 	const params = useParams();
 	const [doctor, setDoctor] = useState(null);
 	const dispatch = useDispatch();
