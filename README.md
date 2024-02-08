@@ -20,13 +20,16 @@ Manage Users, Doctors, and Appointments from the Admin panel
 * Show all doctors/clinic/manager
 * Assign doctor to a clinic
 * Assign Manager to a clinic
-![Screenshot (4)](https://github.com/MuhammedFayistgl/DoctorAppointment/assets/77223454/af4032c2-5733-4dc2-86ab-336423b62c42)
-![Screenshot (8)](https://github.com/MuhammedFayistgl/DoctorAppointment/assets/77223454/77ba6309-ab1a-4f4c-be4e-3ab37b1ac63e)
-![Screenshot (5)](https://github.com/MuhammedFayistgl/DoctorAppointment/assets/77223454/c59ea8a4-3d18-4e4e-8896-fa2e9b6cef53)
-![Screenshot (9)](https://github.com/MuhammedFayistgl/DoctorAppointment/assets/77223454/ed948942-6849-4f3c-ab00-10f78ebbae5c)
-![Screenshot (10)](https://github.com/MuhammedFayistgl/DoctorAppointment/assets/77223454/fe569c09-6a40-4c5e-a2b6-88a8c942d15e)
-![Screenshot (11)](https://github.com/MuhammedFayistgl/DoctorAppointment/assets/77223454/0851217d-71a8-472b-bdfb-a895cbdbed57)
-![Screenshot (7)](https://github.com/MuhammedFayistgl/DoctorAppointment/assets/77223454/44bdddd4-5fb2-4dda-83a2-e84b6521ed2a)
-![Screenshot (6)](https://github.com/MuhammedFayistgl/DoctorAppointment/assets/77223454/ae3641e2-4ec7-4dac-8510-4eedde4c9c2b)
+![Screenshot (3)](https://github.com/MuhammedFayistgl/Doctor-appointment/assets/77223454/63e67ba3-b04d-41ca-a33b-c6e6ef28a947)
+![Screenshot (4)](https://github.com/MuhammedFayistgl/Doctor-appointment/assets/77223454/c71628f8-891d-47d2-be07-43b2c6d45680)
+![Screenshot (5)](https://github.com/MuhammedFayistgl/Doctor-appointment/assets/77223454/b716aab8-1ccd-45e6-87e4-a132a2cd0eae)
+![Screenshot (11)](https://github.com/MuhammedFayistgl/Doctor-appointment/assets/77223454/4c4e68cf-7070-450e-91d4-ba061a5ab6c5)
+![Screenshot (10)](https://github.com/MuhammedFayistgl/Doctor-appointment/assets/77223454/1831b6b5-eb48-41fa-befd-3723a7decfb5)
+![Screenshot (9)](https://github.com/MuhammedFayistgl/Doctor-appointment/assets/77223454/b0d51fc4-5777-4747-9062-5d86df33ab91)
+![Screenshot (8)](https://github.com/MuhammedFayistgl/Doctor-appointment/assets/77223454/68eec2d3-d8bd-440c-83b2-f66dc643dae7)
+![Screenshot (7)](https://github.com/MuhammedFayistgl/Doctor-appointment/assets/77223454/aff043f2-eefe-4180-bae0-e0f69f0a1ac3)
+![Screenshot (6)](https://github.com/MuhammedFayistgl/Doctor-appointment/assets/77223454/7ede624f-5194-4f7c-86cc-0378567a0d38)
+
+
 
 <!--  -->
