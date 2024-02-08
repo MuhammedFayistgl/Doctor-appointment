@@ -28,3 +28,5 @@ Manage Users, Doctors, and Appointments from the Admin panel
 ![Screenshot (11)](https://github.com/MuhammedFayistgl/DoctorAppointment/assets/77223454/0851217d-71a8-472b-bdfb-a895cbdbed57)
 ![Screenshot (7)](https://github.com/MuhammedFayistgl/DoctorAppointment/assets/77223454/44bdddd4-5fb2-4dda-83a2-e84b6521ed2a)
 ![Screenshot (6)](https://github.com/MuhammedFayistgl/DoctorAppointment/assets/77223454/ae3641e2-4ec7-4dac-8510-4eedde4c9c2b)
+
+<!--  -->
