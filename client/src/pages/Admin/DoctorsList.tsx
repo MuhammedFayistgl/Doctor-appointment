@@ -17,7 +17,7 @@ function DoctorsList() {
 	const getDoctorsData = async () => {
 		try {
 			dispatch(showLoading());
-			const resposne = await AxiosConnection.get("/api/admin/get-all-doctors",{token:document.cookie,});
+			const resposne = await AxiosConnection.get("/api/admin/get-all-doctors");
 			dispatch(hideLoading());
 			if (resposne.data.success) {
 				setDoctors(resposne.data.data);
@@ -116,7 +116,7 @@ function DoctorsList() {
 		<Layout>
 			<h1 style={{color:'#0087ba'}} className="page-header"><GiStethoscope/> Doctors List</h1>
 			<hr />
-			<Table columns={columns} dataSource={doctors} />
+			<Table columns={columns} dataSource={doctors.reverse()} />
 		</Layout>
 	);
 }
