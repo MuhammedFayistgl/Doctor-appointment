@@ -5,18 +5,18 @@ import { showLoading, hideLoading } from "../redux/alertsSlice";
 import { AxiosConnection } from "../utils/AxiosINSTENCE";
 import Pagnation from "../components/Pagnation";
 import CardLayout from "../components/Card/Dr_Card/CardLayout";
-import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { DoctorsType } from "../types/DoctorsType";
 import { setDoctors } from "../redux/DoctorSlice";
 import { RootState } from "../types/redux";
 import CardPlaceHolder from "../components/PliceHolder/CardPlaceHolder";
 import toast from "react-hot-toast";
 function Home() {
-    const [page, setpage] = useState(1);
-    const [perpage] = useState(4);
+    const [page, setPage] = useState(1);
+    const [perPage] = useState(10);
     /**  */
-    const end = page * perpage;
-    const start = end - perpage;
+    const end = page * perPage;
+    const start = end - perPage;
     const { doctors } = useSelector((state: RootState) => state.Doctors);
     const dispatch = useDispatch();
 
@@ -25,17 +25,10 @@ function Home() {
     const { data, isLoading, error } = useQuery({
         queryKey: ["api-user-get-all-approved-doctors"],
         queryFn: () => AxiosConnection.get("api/user/get-all-approved-doctors"),
-        staleTime: 60 * 1000,
     });
 
-    if (isLoading) dispatch(showLoading());
-    if (data?.data?.success) {
-        dispatch(setDoctors(data?.data?.data));
-        dispatch(hideLoading());
-    }
-    if (error) {
-        toast.error(error.message);
-    }
+    if (data?.data?.success) dispatch(setDoctors(data?.data?.doctors));
+    if (error) toast.error(error?.message);
 
     return (
         <Layout>
@@ -46,20 +39,27 @@ function Home() {
                     justifyContent: "space-between",
                     flexWrap: "nowrap",
                     height: "-webkit-fill-available",
+                    position: "relative",
                 }}>
                 <div
                     style={{
-                        overflow: "scroll",
+                        // overflow: "scroll",
                         display: "flex",
                         flexDirection: "row",
                         flexWrap: "wrap",
                         gap: 9,
                         justifyContent: "space-evenly",
                     }}>
-                    {doctors ? doctors?.slice(start, end).map((doctor, i) => <CardLayout key={i} doctor={doctor} />) : <CardPlaceHolder />}
+                    {isLoading ? (
+                        <CardPlaceHolder />
+                    ) : (
+                        doctors?.slice(start, end).map((doctor, i) => <CardLayout key={i} doctor={doctor} />)
+                    )}
                 </div>
-                <div style={{ display: "flex", placeContent: "center" }}>
-                    <Pagnation setpage={setpage} length={Math.ceil(doctors?.length / 4)} />
+                <div
+
+                    style={{ display: "flex", placeContent: "center", position: "fixed", bottom: 0, left: 0, right: 0 }}>
+                    <Pagnation setpage={setPage} length={Math.ceil(doctors?.length / 4)} />
                 </div>
             </div>
         </Layout>

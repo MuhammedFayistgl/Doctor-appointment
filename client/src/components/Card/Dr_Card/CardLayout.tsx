@@ -5,15 +5,19 @@ import CardBody from "./CardBody";
 import CardFooter from "./CardFooter";
 import { useNavigate } from "react-router-dom";
 import { DoctorsType } from "../../../types/DoctorsType";
+import { useState } from "react";
 
 type CardLayoutType = {
     doctor: DoctorsType;
 };
 const CardLayout = ({ doctor }: CardLayoutType) => {
+    const [first, setfirst] = useState(false)
     const navigate = useNavigate();
+    console.log('layout child',first);
     return (
         <Box
-            onClick={() => navigate(`/book-appointment/${doctor?._id}`)}
+            // onClick={() => navigate(`/book-appointment/${doctor?._id}`)}
+            onClick = {()=> setfirst(!first )}
             sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -24,6 +28,7 @@ const CardLayout = ({ doctor }: CardLayoutType) => {
                 padding: 2,
                 minWidth: 240,
                 overflow: "scroll",
+                maxWidth: 240,
             }}>
             <CardAvathar />
             <CardBody doctor={doctor} />

@@ -14,6 +14,7 @@ export interface UserType {
 export interface SeenNotificationType {
     message: string;
     data?: DataType;
+    onClickPath:string;
 }
 
 export interface DataType {

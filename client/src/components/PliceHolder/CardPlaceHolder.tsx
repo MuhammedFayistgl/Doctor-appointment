@@ -3,6 +3,9 @@ import React from "react";
 import { Placeholder } from "rsuite";
 
 const CardPlaceHolder = () => {
+    // setTimeout(() => {
+    //     window.location.reload(false)
+    // }, 3000)
     return (
         <Box
             sx={{

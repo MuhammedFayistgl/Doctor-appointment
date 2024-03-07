@@ -15,15 +15,17 @@ function Appointments() {
 	const getAppointmentsData = async () => {
 		try {
 			dispatch(showLoading());
-			const resposne = await AxiosConnection.get("/api/user/get-appointments-by-user-id",{token:document.cookie,});
+			const response = await AxiosConnection.get("/api/user/get-appointments-by-user-id");
 			dispatch(hideLoading());
-			if (resposne.data.success) {
-				setAppointments(resposne.data.data);
+			if (response.data.success) {
+				setAppointments(response.data.data);
 			}
 		} catch (error) {
 			dispatch(hideLoading());
 		}
 	};
+	console.log("appointments", appointments);
+	
 	const columns = [
 		{
 			title: "Id",

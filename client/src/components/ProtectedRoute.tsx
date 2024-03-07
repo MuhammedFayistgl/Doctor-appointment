@@ -12,6 +12,7 @@ import { AxiosConnection } from "../utils/AxiosINSTENCE";
 import { useCookies } from "react-cookie";
 import { RootState } from "../types/redux";
 import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 type ProtectedRouteType = {
     children: ReactNode;
 };
@@ -21,22 +22,13 @@ function ProtectedRoute({ children }: ProtectedRouteType) {
     const { user } = useSelector((state: RootState) => state.userSlice);
     const dispatch = useDispatch();
 
-    useQuery({
+    const { data, error, isLoading, isFetched, failureReason } = useQuery({
         queryKey: ["get-user-info-by-id"],
-        queryFn: async () => {
-            dispatch(showLoading());
-                AxiosConnection.post("/api/user/get-user-info-by-id")
-                    .then((response) => {
-                        if (response.data.success) {
-                            dispatch(setUser(response.data.data));
-                            dispatch(hideLoading());
-                        }
-                    })
-                    .catch((error) => dispatch(hideLoading()));
-        },
+        queryFn: async () => AxiosConnection.post("/api/user/get-user-info-by-id"),
     });
-
-    if (cookies?.token) {
+    if (isFetched) dispatch(setUser(data?.data?.data));
+    if (error) toast.error(`${failureReason}`);
+    if (cookies?.token ) {
         return children;
     } else {
         return <Navigate to="/login" />;

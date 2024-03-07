@@ -8,74 +8,87 @@ import Layout from "../components/Layout";
 import { hideLoading, showLoading } from "../redux/alertsSlice";
 import { setUser } from "../redux/userSlice";
 import { AxiosConnection } from "../utils/AxiosINSTENCE";
+import { RootState } from "../types/redux";
 
 function Notifications() {
-  const {user} = useSelector((state) => state.user);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const markAllAsSeen=async()=>{
-    try {
-        dispatch(showLoading());
-        const response = await AxiosConnection.post("/api/user/mark-all-notifications-as-seen", {token:document.cookie,userId : user._id});
-        dispatch(hideLoading());
-        if (response.data.success) {
-          toast.success(response.data.message)
-          dispatch(setUser(response.data.data));
-        } else {
-          toast.error(response.data.message);
+    const { user } = useSelector((state: RootState) => state.userSlice);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const markAllAsSeen = async () => {
+        try {
+            dispatch(showLoading());
+            const response = await AxiosConnection.post("/api/user/mark-all-notifications-as-seen", {
+                token: document.cookie,
+                userId: user?._id,
+            });
+            dispatch(hideLoading());
+            if (response.data.success) {
+                toast.success(response.data.message);
+                dispatch(setUser(response.data.data));
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            dispatch(hideLoading());
+            toast.error("Something went wrong");
         }
-      } catch (error) {
-        dispatch(hideLoading());
-        toast.error("Something went wrong");
-      }
-  }
+    };
 
-  const deleteAll=async()=>{
-    try {
-        dispatch(showLoading());
-        const response = await AxiosConnection.post("/api/user/delete-all-notifications", {token:document.cookie,userId : user._id});
-        dispatch(hideLoading());
-        if (response.data.success) {
-          toast.success(response.data.message)
-          dispatch(setUser(response.data.data));
-        } else {
-          toast.error(response.data.message);
+    const deleteAll = async () => {
+        try {
+            dispatch(showLoading());
+            const response = await AxiosConnection.post("/api/user/delete-all-notifications", {
+                token: document.cookie,
+                userId: user?._id,
+            });
+            dispatch(hideLoading());
+            if (response.data.success) {
+                toast.success(response.data.message);
+                dispatch(setUser(response.data.data));
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            dispatch(hideLoading());
+            toast.error("Something went wrong");
         }
-      } catch (error) {
-        dispatch(hideLoading());
-        toast.error("Something went wrong");
-      }
-  }
-  return (
-    <Layout>
-      <h1 className="page-title">Notifications</h1>
-      <hr />
+    };
+    // const unseenNotificationsData =;
+    return (
+        <Layout>
+            <h1 className="page-title">Notifications</h1>
+            <hr />
 
-      <Tabs>
-        <Tabs.TabPane tab="Unseen" key={0}>
-          <div className="d-flex justify-content-end">
-            <h1 className="anchor" onClick={()=>markAllAsSeen()}>Mark all as seen</h1>
-          </div>
+            <Tabs>
+                <Tabs.TabPane tab="Unseen" key={0}>
+                    <div className="d-flex justify-content-end">
+                        <h1 className="anchor" onClick={() => markAllAsSeen()}>
+                            Mark all as seen
+                        </h1>
+                    </div>
 
-          {[...user?.unseenNotifications]?.reverse()?.map((notification,i) => (
-            <div key={i} className="notification-card p-2 mt-2" onClick={()=>navigate(notification.onClickPath)}>
-                <div className="card-text">{notification.message}</div>
+                    { [...(user?.unseenNotifications ?? [])]?.reverse()?.map((notification,i) => (
+            <div key={i} className="notification-card p-2 mt-2" onClick={()=>navigate(notification?.onClickPath)}>
+                <div className="card-text">{notification?.message}</div>
             </div>
           ))}
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="seen" key={1}>
-          <div className="d-flex justify-content-end">
-            <h1 className="anchor" onClick={()=>deleteAll()}>Delete all</h1>
-          </div>
-          {user?.seenNotifications.map((notification,i) => (
-            <div key={i} className="notification-card p-2 mt-2" onClick={()=>navigate(notification.onClickPath)}>
-                <div className="card-text">{notification.message}</div>
-            </div>
-          ))}
-        </Tabs.TabPane>
-      </Tabs>
-    </Layout>
-  );
+                </Tabs.TabPane>
+                <Tabs.TabPane tab="seen" key={1}>
+                    <div className="d-flex justify-content-end">
+                        <h1 className="anchor" onClick={() => deleteAll()}>
+                            Delete all
+                        </h1>
+                    </div>
+                    {user?.seenNotifications.map((notification, i) => (
+                        <div key={i} className="notification-card p-2 mt-2">
+                            <div className="card-text">{notification.message}</div>
+                        </div>
+                    ))}
+                </Tabs.TabPane>
+            </Tabs>
+        </Layout>
+    );
 }
+
 
 export default Notifications;

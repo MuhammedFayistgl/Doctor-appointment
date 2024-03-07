@@ -33,11 +33,11 @@ const navigate = useNavigate();
             dispatch(hideLoading());
             if (response.data.success) {
 
-                setCookie("token", response.data.data);
+                setCookie("token", response?.data?.data);
                 navigate('/')
-                toast.success(response.data.message);
+                toast.success(response?.data?.message);
             } else {
-                toast.error(response.data.message);
+                toast.error(response?.data?.message);
             }
         } catch (error) {
             dispatch(hideLoading());
@@ -64,6 +64,8 @@ const navigate = useNavigate();
                     </div>
 
                     {/* Login Form  */}
+                    <div>Admin@gmail.com</div>
+                    <div>123456</div>
                     <Form layout="inline" onChange={setFormValue} formValue={formValue}>
                         <Form.Group controlId="username-8">
                             <Form.Control placeholder="Username" name="email"  />
@@ -85,7 +87,7 @@ const navigate = useNavigate();
                         </Button>
                     </Form>
 
-                    {/* Remind Passowrd */}
+                    {/* Remind Password */}
                     <div id="formFooter">
                         <a className="underlineHover a" href="#">
                             Forgot Password?
@@ -98,24 +100,4 @@ const navigate = useNavigate();
 }
 
 export default Login;
-{
-    // <div className="authentication">
-    // 	<div className="authentication-form card p-3">
-    // 		<h1 className="card-title">Welcome Back</h1>
-    // 		<Form layout="vertical" onFinish={onFinish}>
-    // 			<Form.Item label="Email" name="email">
-    // 				<Input placeholder="Email" value={"USER@gmail.com"} />
-    // 			</Form.Item>
-    // 			<Form.Item label="Password" name="password">
-    // 				<Input placeholder="Password" type="password" value={123456} />
-    // 			</Form.Item>
-    // 			<Button className="primary-button my-2 full-width-button" htmlType="submit">
-    // 				LOGIN
-    // 			</Button>
-    // 			<Link to="/register" className="anchor mt-2">
-    // 				CLICK HERE TO REGISTER
-    // 			</Link>
-    // 		</Form>
-    // 	</div>
-    // </div>;
-}
+
