@@ -17,7 +17,7 @@ import { InputGroup } from "rsuite";
 import EyeIcon from "@rsuite/icons/legacy/Eye";
 import EyeSlashIcon from "@rsuite/icons/legacy/EyeSlash";
 
-import "./style.css";
+
 type FormDataType = {
     name: string;
     email: string;

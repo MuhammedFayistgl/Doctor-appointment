@@ -8,7 +8,7 @@ import './input.css'
 // style link
 import "antd/dist/antd.min.css";
 import "rsuite/dist/rsuite.min.css";
-import "../src/pages/style.css";
+
 import "./index.css";
 import { Suspense } from "react";
 import { ToastProvider } from "react-toast-notifications";
