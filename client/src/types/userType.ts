@@ -1,3 +1,5 @@
+import { DoctorsType } from "./DoctorsType";
+
 export interface UserType {
     _id: string;
     name: string;
@@ -14,10 +16,24 @@ export interface UserType {
 export interface SeenNotificationType {
     message: string;
     data?: DataType;
-    onClickPath:string;
+    onClickPath: string;
 }
 
 export interface DataType {
     doctorId: string;
     name: string;
+}
+
+export interface AppointmentsType {
+    _id: string;
+    createdAt: Date;
+    date: Date;
+    doctorId: string;
+    doctorInfo: DoctorsType;
+    status: string;
+    time: Date;
+    updatedAt: Date;
+    userId: string;
+    userInfo: UserType;
+    __v: number;
 }

@@ -26,9 +26,12 @@ function ProtectedRoute({ children }: ProtectedRouteType) {
         queryKey: ["get-user-info-by-id"],
         queryFn: async () => AxiosConnection.post("/api/user/get-user-info-by-id"),
     });
-    if (isFetched) dispatch(setUser(data?.data?.data));
-    if (error) toast.error(`${failureReason}`);
-    if (cookies?.token ) {
+
+    if (isFetched) {
+        dispatch(setUser(data?.data?.data));
+    }
+    // else i toast.error(`${failureReason}`);
+    if (cookies?.token) {
         return children;
     } else {
         return <Navigate to="/login" />;

@@ -22,27 +22,24 @@ function Login() {
     const [visible, setVisible] = React.useState(false);
     const [formValue, setFormValue] = React.useState({});
     const location = useLocation();
-const navigate = useNavigate();
+    const navigate = useNavigate();
     const handleChange = () => {
         setVisible(!visible);
     };
     const onFinish = async () => {
-        try {
-            dispatch(showLoading());
-            const response = await AxiosConnection.post("api/user/login", formValue);
-            dispatch(hideLoading());
-            if (response.data.success) {
-
-                setCookie("token", response?.data?.data);
-                navigate('/')
-                toast.success(response?.data?.message);
-            } else {
-                toast.error(response?.data?.message);
-            }
-        } catch (error) {
-            dispatch(hideLoading());
-            toast.error("Something went wrong");
-        }
+        AxiosConnection.post("api/user/login", formValue)
+            .then((response) => {
+                if (response.data.success) {
+                    setCookie("token", response?.data?.data);
+                    navigate("/");
+                    toast.success(response?.data?.message);
+                } else {
+                    toast.error(response?.data?.message);
+                }
+            })
+            .catch((error) => {
+                toast.error("Something went wrong");
+            });
     };
     // ${geturlendpoint === 'login' && "active"}
     return (
@@ -68,7 +65,7 @@ const navigate = useNavigate();
                     <div>123456</div>
                     <Form layout="inline" onChange={setFormValue} formValue={formValue}>
                         <Form.Group controlId="username-8">
-                            <Form.Control placeholder="Username" name="email"  />
+                            <Form.Control placeholder="Username" name="email" />
                         </Form.Group>
 
                         <Form.Group controlId="password-8">
@@ -77,12 +74,7 @@ const navigate = useNavigate();
                                 <InputGroup.Button onClick={handleChange}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
                             </InputGroup>
                         </Form.Group>
-                        <Button
-                            onClick={() => onFinish()}
-                            color="cyan"
-                            appearance="ghost"
-                            style={{ marginBottom: 20, width: 223 }}
-                            >
+                        <Button onClick={() => onFinish()} color="cyan" appearance="ghost" style={{ marginBottom: 20, width: 223 }}>
                             Login
                         </Button>
                     </Form>
@@ -100,4 +92,3 @@ const navigate = useNavigate();
 }
 
 export default Login;
-

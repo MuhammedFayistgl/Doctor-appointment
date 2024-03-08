@@ -11,13 +11,11 @@ type CardLayoutType = {
     doctor: DoctorsType;
 };
 const CardLayout = ({ doctor }: CardLayoutType) => {
-    const [first, setfirst] = useState(false)
     const navigate = useNavigate();
-    console.log('layout child',first);
+
     return (
         <Box
-            // onClick={() => navigate(`/book-appointment/${doctor?._id}`)}
-            onClick = {()=> setfirst(!first )}
+            onClick={() => navigate(`/book-appointment/${doctor?._id}`)}
             sx={{
                 display: "flex",
                 flexDirection: "column",
