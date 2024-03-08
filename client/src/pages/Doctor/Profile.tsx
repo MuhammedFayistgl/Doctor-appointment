@@ -9,20 +9,21 @@ import DoctorForm from "../../components/DoctorForm";
 import moment from "moment";
 import { AxiosConnection } from "../../utils/AxiosINSTENCE";
 import { RootState } from "../../types/redux";
+import { DoctorsType } from "../../types/DoctorsType";
 
 function Profile() {
-	const { user } = useSelector((state:RootState) => state.user);
+	const { user } = useSelector((state:RootState) => state.userSlice);
 	const params = useParams();
 	const [doctor, setDoctor] = useState(null);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const onFinish = async (values) => {
+	const onFinish = async (values:DoctorsType) => {
 		try {
 			dispatch(showLoading());
 			const response = await AxiosConnection.post("/api/doctor/update-doctor-profile", {
-				token:document.cookie,
+				
 				...values,
-				userId: user._id,
+				userId: user?._id,
 				timings: [moment(values.timings[0]).format("HH:mm"), moment(values.timings[1]).format("HH:mm")],
 			});
 			dispatch(hideLoading());
@@ -71,7 +72,7 @@ function Profile() {
 		<Layout>
 			<h1 className="page-title">Doctor Profile</h1>
 			<hr />
-			{doctor && <DoctorForm onFinish={onFinish} initivalValues={doctor} />}
+			{doctor && <DoctorForm onFinish={onFinish}  />}
 		</Layout>
 	);
 }
