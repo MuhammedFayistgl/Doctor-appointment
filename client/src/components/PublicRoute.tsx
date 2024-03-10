@@ -8,7 +8,7 @@ type childType = {
 
 const PublicRoute:React.FC<childType> = ({ children }) => {
     const [cookies] = useCookies(["token"]);
-    if (cookies?.token) {
+    if (!cookies?.token) {
         return <Navigate to="/" />;
     } else {
         return children;

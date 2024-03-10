@@ -11,14 +11,14 @@ import { Form, Button } from "rsuite";
 import { InputGroup } from "rsuite";
 import EyeIcon from "@rsuite/icons/legacy/Eye";
 import EyeSlashIcon from "@rsuite/icons/legacy/EyeSlash";
-
-
+import { setUser } from "../redux/userSlice";
 
 function Login() {
     const dispatch = useDispatch();
 
     const [cookies, setCookie, removeCookie] = useCookies(["token"]);
     const [visible, setVisible] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
     const [formValue, setFormValue] = React.useState({});
     const location = useLocation();
     const navigate = useNavigate();
@@ -26,21 +26,25 @@ function Login() {
         setVisible(!visible);
     };
     const onFinish = async () => {
+        setLoading(true)
         AxiosConnection.post("api/user/login", formValue)
-            .then((response) => {
+            .then((response) => {        
                 if (response.data.success) {
+                    dispatch(setUser(response.data?.user));
+                    setLoading(false)
                     setCookie("token", response?.data?.data);
                     navigate("/");
                     toast.success(response?.data?.message);
                 } else {
+                    setLoading(false)
                     toast.error(response?.data?.message);
                 }
             })
             .catch((error) => {
+                setLoading(false)
                 toast.error("Something went wrong");
             });
     };
-    // ${geturlendpoint === 'login' && "active"}
     return (
         <>
             <div className="wrapper fadeInDown">
@@ -73,7 +77,7 @@ function Login() {
                                 <InputGroup.Button onClick={handleChange}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
                             </InputGroup>
                         </Form.Group>
-                        <Button onClick={() => onFinish()} color="cyan" appearance="ghost" style={{ marginBottom: 20, width: 223 }}>
+                        <Button loading={loading} onClick={() => onFinish()} color="cyan" appearance="ghost" style={{ marginBottom: 20, width: 223 }}>
                             Login
                         </Button>
                     </Form>

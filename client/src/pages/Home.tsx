@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Layout from "../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { showLoading, hideLoading } from "../redux/alertsSlice";
@@ -20,7 +20,6 @@ function Home() {
     const { doctors } = useSelector((state: RootState) => state.Doctors);
     const dispatch = useDispatch();
 
-    const queryClient = useQueryClient();
 
     const { data, isLoading, error } = useQuery({
         queryKey: ["api-user-get-all-approved-doctors"],
@@ -56,9 +55,7 @@ function Home() {
                         doctors?.slice(start, end).map((doctor, i) => <CardLayout key={i} doctor={doctor} />)
                     )}
                 </div>
-                <div
-
-                    style={{ display: "flex", placeContent: "center", position: "fixed", bottom: 0, left: 0, right: 0 }}>
+                <div style={{ display: "flex", placeContent: "center", position: "fixed", bottom: 0, left: 0, right: 0 }}>
                     <Pagnation setpage={setPage} length={Math.ceil(doctors?.length / 4)} />
                 </div>
             </div>

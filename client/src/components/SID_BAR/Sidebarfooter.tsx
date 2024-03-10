@@ -14,28 +14,28 @@ const Sidebarfooter = () => {
 	return (
 		<>
 			<div className="sidebar-footer">
-				<a onClick={() => navigate("/notifications")} >
+				<span onClick={() => navigate("/notifications")} >
 					<Badge content={user?.unseenNotifications.length} color="yellow" >
 						<BsBellFill />
 					</Badge>
 					{/* <span className="badge badge-pill badge-warning notification">3</span> */}
-				</a>
-				<a href="#">
+				</span>
+				<span >
 					<Badge content={99} color="green">
 						<HiMail style={{ fontSize: 18 }} />
 					</Badge>
-				</a>
-				<a href="#">
+				</span>
+				<span >
                 <Badge  color="red" >
                     <FiSettings />
                 </Badge>
 					
 				
-				</a>
-				<a href="#">
+				</span>
+				<span >
                 <Alertdialogs  />
 					{/* <FaPowerOff /> */}
-				</a>
+				</span>
 			</div>
 		</>
 	);

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { ReactNode, useState } from "react";
-import "../layout.css";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Badge } from "antd";
@@ -15,65 +15,32 @@ type LayoutType = {
 };
 function Layout({ children }: LayoutType) {
     const { width } = useWindowSize();
-    const [collapsed, setCollapsed] = useState(true);
-    const [widthTogle, setwidthTogle] = useState(`toggled`);
+    const [collapsed, setCollapsed] = useState<boolean>(false);
     const { user } = useSelector((state: RootState) => state.userSlice);
 
     const navigate = useNavigate();
 
-    // /apply-doctor
-
     return (
         <>
-            {/* <div className="main">
-        <div className="d-flex layout"> */}
-            {/* <div className="sidebar">
-            <div className="sidebar-header">
-              <h1 className="logo">SH</h1>
-              <h1 className="role">{role}</h1>
-            </div>
-
-            <div className="menu">
-              {menuToBeRendered.map((menu, i) => {
-                const isActive = location.pathname === menu.path;
-                return (
-                  <div key={i} className={`d-flex menu-item ${isActive && "active-menu-item"}`}>
-                    <Link to={menu.path}>
-                      <i className={menu.icon}></i>
-                    </Link>
-                    {!collapsed && <Link to={menu.path}>{menu.name}</Link>}
-                  </div>
-                );
-              })}
-              <div className={`d-flex menu-item `}>
-                <Alertdialogs coll={collapsed} />
-              </div>
-            </div>
-          </div> */}
-            <div className={`page-wrapper chiller-theme ${collapsed || (width && width > 640) ? widthTogle : ""}`}>
-                {/* <a id="show-sidebar" className="btn btn-sm btn-dark" href="#">
-          <FaBarsStaggered style={{ color: "#ffff", fontSize: 25 }} onClick={() => { setCollapsed(true), setwidthTogle('toggled')}} />
-        </a> */}
-                <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} setwidthTogle={setwidthTogle} />
+            <div
+                className={`page-wrapper chiller-theme
+         ${width && width < 768 && collapsed && "toggled"}
+        ${(width && width >= 768 && collapsed) || (width && width >= 768 && "toggled")}`}>
+                <Sidebar setCollapsed={setCollapsed} collapsed={collapsed} />
 
                 <div className="content">
-                    <main className="page-content">
+                    <main className="page-content pl-[250px] ">
                         <div className="header">
-                            {!collapsed && (
-                                <i
-                                    className="ri-close-fill header-action-icon"
-                                    onClick={() => {
-                                        setCollapsed(!collapsed), setwidthTogle("toggled");
-                                    }}
-                                />
-                            )}
+                            <i className="ri-close-fill header-action-icon" onClick={() => setCollapsed(!collapsed)} />
 
                             <div className="d-flex align-items-center px-4">
-                                <Badge count={user?.unseenNotifications.length}>
-                                    <i
-                                        onClick={() => navigate("/notifications")}
-                                        className="ri-notification-line header-action-icon pl-3"></i>
-                                </Badge>
+                                {user && user.unseenNotifications && (
+                                    <Badge count={user.unseenNotifications.length}>
+                                        <i
+                                            onClick={() => navigate("/notifications")}
+                                            className="ri-notification-line header-action-icon pl-3"></i>
+                                    </Badge>
+                                )}
 
                                 <Link className="anchor mx-2" to="/profile">
                                     <UserProfileButton />
@@ -85,8 +52,6 @@ function Layout({ children }: LayoutType) {
                     </main>
                 </div>
             </div>
-            {/* </div>
-      </div> */}
         </>
     );
 }

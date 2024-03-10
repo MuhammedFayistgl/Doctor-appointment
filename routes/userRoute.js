@@ -66,7 +66,7 @@ router.post("/login", async (req, res) => {
 				// 	withCredentials: true,
 				// })
 				.status(200) // { expires: new Date(new Date().getTime() + (1000 * 60 * 60 * 24 * 365)) , httpOnly : false}
-				.send({ message: "Login successful", success: true, data: token });
+				.send({ message: "Login successful", success: true, data: token,user:user });
 		}
 	} catch (error) {
 		console.log(error);

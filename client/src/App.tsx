@@ -20,12 +20,13 @@ const Appointments = lazy(() => import("./pages/Appointments"));
 const DoctorAppointments = lazy(() => import("./pages/Doctor/DoctorAppointments"));
 const Userprofile = lazy(() => import("./pages/User/Userprofile"));
 
-function App() {
+ function App() {
     const { loading } = useSelector((state: RootState) => state.alerts);
     axios.defaults.withCredentials = true;
     // eslint-disable-next-line no-unused-vars
 
     return (
+       
         <HashRouter>
             {loading && (
                 <div className="spinner-parent">
@@ -140,3 +141,6 @@ function App() {
 }
 
 export default App;
+
+
+
