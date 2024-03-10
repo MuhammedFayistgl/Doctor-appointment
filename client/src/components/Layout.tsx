@@ -24,8 +24,8 @@ function Layout({ children }: LayoutType) {
         <>
             <div
                 className={`page-wrapper chiller-theme
-         ${width && width < 768 && collapsed && "toggled"}
-        ${(width && width >= 768 && collapsed) || (width && width >= 768 && "toggled")}`}>
+            ${width && width < 768 && collapsed && "toggled"}
+            ${(width && width >= 768 && collapsed) || (width && width >= 768 && "toggled")}`}>
                 <Sidebar setCollapsed={setCollapsed} collapsed={collapsed} />
 
                 <div className="content">
