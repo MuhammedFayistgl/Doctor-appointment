@@ -1,0 +1,1 @@
+import{A as r,G as n,y as i,N as u}from"./index-7eebd061.js";function l({children:o}){r(s=>s.userSlice);const[e,a,t]=n(["token"]);return e!=null&&e.token?o:(t("token"),i.jsx(u,{to:"/login"}))}export{l as default};
