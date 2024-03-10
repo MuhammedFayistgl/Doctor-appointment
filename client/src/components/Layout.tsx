@@ -32,7 +32,6 @@ function Layout({ children }: LayoutType) {
                     <main className="page-content pl-[250px] ">
                         <div className="header">
                             <i className="ri-close-fill header-action-icon" onClick={() => setCollapsed(!collapsed)} />
-
                             <div className="d-flex align-items-center px-4">
                                 {user && user.unseenNotifications && (
                                     <Badge count={user.unseenNotifications.length}>
@@ -41,7 +40,6 @@ function Layout({ children }: LayoutType) {
                                             className="ri-notification-line header-action-icon pl-3"></i>
                                     </Badge>
                                 )}
-
                                 <Link className="anchor mx-2" to="/profile">
                                     <UserProfileButton />
                                 </Link>
